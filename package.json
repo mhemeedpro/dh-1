@@ -1,0 +1,28 @@
+{
+  "name": "dh-1",
+  "version": "1.0.0",
+  "description": "bot browsers",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhemeedpro/dh-1.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "mhemeedpro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhemeedpro/dh-1/issues"
+  },
+  "homepage": "https://github.com/mhemeedpro/dh-1#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "phantom": "^6.3.0"
+  }
+}
