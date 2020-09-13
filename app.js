@@ -20,16 +20,18 @@
  *
  *
  */
+
+
 var yaf = function() {}; //
 
-module.exports = new yaf();
+//module.exports = new yaf();
 
 
-var phantom = require('node-phantom');
+var phantom = require('http');
 
 //var sleep = require('sleep');
 
-
+console.log("hi start bot ")
 var configTestForum = {
   loginUrl: "http://testforum.yetanotherforum.net/login",
   loginFormDetail: {
