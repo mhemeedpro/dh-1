@@ -31,7 +31,9 @@ var phantom = require('http');
 
 //var sleep = require('sleep');
 
-console.log("hi start bot ")
+console.log("hi start bot ")//remove later this commit 
+
+
 var configTestForum = {
   loginUrl: "http://testforum.yetanotherforum.net/login",
   loginFormDetail: {
@@ -229,7 +231,7 @@ yaf.prototype.login = function(username, password, cb) {
     });
   });
 
-
+console.log("finish code")
   //  var page = webPage.create();
 
 };
