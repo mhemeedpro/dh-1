@@ -1,15 +1,41 @@
 
 var page = require('webpage').create();
-page.open('https://www.facebook.com/', function() {
-    page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
-    setTimeout(function() {
-         document.getElementById('email').value='jonadamaroof@hotmail.com';
+page.open('https://www.bbsfonline.com/BbsfOnline/Public/User/Login', function(status) {
+  // page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
+     //console.log(status)
+    //  if(status==="success")
+    //  {
+      console.log(status)
+       console.log("start write data")
+       page.evaluate(function()
+       {
+        
+         //document.write("mosaab")
+         document.getElementById('UserName').value ='mhemeed mosaab';
+         document.getElementById('password-input').value ='mhemeed mosaab';
+         document.getElementById('submit_btn').submit;
+         document.write(document.getElementById("messages"))
+       });
+      // console.log(page.plainText)
+      setTimeout(function()  {
+        page.render('test.png'); 
+          phantom.exit();
+     }, 1010);
+     //}
+   // setTimeout(function() {
+     
+     // console.log("start timeout function")
+
+       //  document.write("mosaaab")
       // document.getElementById('pass').value='jonadamaroof@hotmail.com';
-        page.render('google.png');
-        phantom.exit();
-    }, 200);
+ 
+        
+        
+    //}, 1000);
     console.log('access done');
-})});
+   
+//  })
+});
 
 
 /*
