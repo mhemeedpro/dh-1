@@ -19,15 +19,11 @@ casper.on('error', function(msg,backtrace) {
 
 casper.start ('http://bing.com/',function(){
     this.capture('./out/test.png');
-/*    this.fill('form[action="/search]',{
+    this.fill('form[action="/search]',{
         q:'casperjs'
-    },true); */
+    },true); 
 
-    this.fillSelectors("form[id=sb_form]", {
-     //   'input[name=userID]' : username,
-     //   'input[name=password]' : password
-     q:'casperjs'
-    }, true);
+  
 });
 
 casper.then(function(){
