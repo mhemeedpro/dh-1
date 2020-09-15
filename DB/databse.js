@@ -1,11 +1,13 @@
+
 var mysql = require('mysql');
 
-var conn = require('./DB/conn.js');
+var conn = require('./conn.js');
+
 var con = mysql.createConnection({
-  host: "localhost",
+  host: conn.host,
   user: conn.user,
-  password: "",
-  database: "bot"
+  password: conn.password,
+  database: conn.database
 });
 
 
