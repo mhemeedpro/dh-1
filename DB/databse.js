@@ -1,8 +1,9 @@
 var mysql = require('mysql');
 
+var conn = require('./DB/conn.js');
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
+  user: conn.user,
   password: "",
   database: "bot"
 });
@@ -33,9 +34,9 @@ con.connect(function(err) {
 
     con.query("SELECT * FROM users", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+        console.log(result);   // print all result
 
-      
+      // print Specific field 
      Object.keys(result).forEach(function(key) {
      var row = result[key];
       console.log(row.id_user);
