@@ -24,6 +24,7 @@
     "casperjs": "^1.1.4",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "phantom": "^3.2.1",
     "phantomjs": "^2.1.7"
   }
