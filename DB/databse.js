@@ -3,7 +3,8 @@ var mysql = require('mysql');
 
 var conn = require('./conn.js');
 
-var con = mysql.createConnection({
+// connect to db 
+var con = mysql.createConnection({  
   host: conn.host,
   user: conn.user,
   password: conn.password,

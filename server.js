@@ -1,14 +1,37 @@
-const http = require('http');
-require("./app.js");
-const hostname = '127.0.0.1';
-const port = 3000;
-//process.env.NODE_ENV // "development"
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html');
-  res.end('bot starter');
+const express = require('express'),
+  app = express(),
+  bodyParser = require('body-parser');
+  port = process.env.PORT || 3000;
+
+
+const mysql = require('mysql');
+/*
+// connection configurations
+const mc = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'bot'
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+// connect to database
+//mc.connect();
+//mc.end();
+
+*/
+
+///var sql = require('./model/db.js');
+//sql.end();
+
+
+
+app.listen(port);
+
+console.log('API server started on: ' + port);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var routes = require('./routes/approutes'); //importing route
+routes(app); //register the route
+
