@@ -3,8 +3,13 @@
 
 var User = require('../model/user.js');
 var Bill = require('../model/bill.js');
+var Company = require('../model/company.js');
 
-
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.login = function(req, res) {
  
   var user = new User(req.body);
@@ -26,13 +31,15 @@ else{
   }) ; 
 }
 };
-
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.get_bill_by_point_sale = function(req, res) {
   var new_task = new Task(req.body);
 
   var user = new User(req.body);
-
-
 
   //handles null error 
    if(!user.email || !user.password){
@@ -52,21 +59,24 @@ else{
 }
 };
 
-
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.create_bill= function(req, res){
 
   console.log(req.body);
   var new_bill = new Bill(req.body);
 
   //handles null error 
-   if(!new_bill.id_point_sale || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company ){
+   if(!new_bill.id_point_sale || !new_bill.point_sale || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company ){
 
             res.status(400).send({ error:true, message: 'The bill was not created , Please provide bill items' });
             console.log(new_bill);
 
         }
 else{
-  
   Bill.create_bill(new_bill, function(err, bill) {
     
     if (err)
@@ -76,5 +86,36 @@ else{
 }
 
 };
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.get_all_companies = function(req, res) {
+  Company.getAllCompanies(function(err, companies) {
+
+    console.log('controller get all task')
+    if (err)
+      res.send(err);
+     // console.log('res', companies);
+    res.send(companies);
+  });
+};
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.update_company= function(req, res) {
+  Company.updateById( new Company(req.body), function(err, company) {
+    if (err)
+      res.send(err);
+    res.json(company);
+  });
+};
+
+
 
 

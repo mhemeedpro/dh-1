@@ -5,6 +5,7 @@ var Bill = function(bill){
 
     this.id_bill= bill.id_bill;
     this.id_point_sale = bill.id_point_sale;
+    this.point_sale =bill.point_sale;
     this.amount= bill.amount;
     this.commission = bill.commission;
     this.id_company=bill.id_company;
@@ -36,12 +37,17 @@ Bill.create_bill = function (new_bill, result) {
 module.exports= Bill;
 
 /*
+
+ // create bill . 
+ 
 {
+   
   "id_point_sale":"1",
+  "point_sale":"مركز الزراعة",
   "amount":"12312",
   "commission":"3243",
-  "phone":"34242"
-  "id_company":"2",
-  
+  "phone":"34242",
+  "id_company":"2"
+
 }
 */

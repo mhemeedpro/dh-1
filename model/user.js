@@ -28,3 +28,11 @@ User.login = function (email, password , result) {
 
 
 module.exports= User;
+
+/*
+// login
+  {
+    "email":"zoualfkarhaydar@hotmailcom",
+    "password": "12345"
+}
+ */
