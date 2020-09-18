@@ -4,7 +4,7 @@
 var User = require('../model/user.js');
 var Bill = require('../model/bill.js');
 var Company = require('../model/company.js');
-
+var Notification = require('../model/notification.js');
 /**
  * 
  * @param {*} req 
@@ -113,6 +113,20 @@ exports.update_company= function(req, res) {
     if (err)
       res.send(err);
     res.json(company);
+  });
+};
+
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.get_notification_by_id_comapany = function(req, res) {
+  Notification.getNotificationByIdComapany(req.params.id_company, function(err, notifications) {
+    if (err)
+      res.send(err);
+    res.json(notifications);
   });
 };
 
