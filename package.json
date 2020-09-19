@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mhemeedpro/dh-1#readme",
   "dependencies": {
+    "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "casperjs": "^1.1.4",
     "cheerio": "^1.0.0-rc.3",
