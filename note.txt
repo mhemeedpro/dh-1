@@ -1,0 +1,12 @@
+https://developers.google.com/web/tools/puppeteer/get-started
+
+
+
+https://jestjs.io/docs/en/puppeteer
+
+
+
+https://devdocs.io/puppeteer/
+
+
+https://www.toptal.com/puppeteer/headless-browser-puppeteer-tutorial
