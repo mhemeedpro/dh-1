@@ -1,6 +1,6 @@
 'use strict';
 
-
+var sss = require('../test24.js');
 var User = require('../model/user.js');
 var Bill = require('../model/bill.js');
 var Company = require('../model/company.js');
@@ -82,7 +82,10 @@ else{
     if (err)
       res.send(err);
     res.json(bill);
+    ////
+      sss.bemo();
   });
+
 }
 
 };
