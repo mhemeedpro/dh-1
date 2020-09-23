@@ -13,6 +13,7 @@ var Bill = function(bill){
     this.success = bill.success;
     this.note = bill.note;
     this.id_user =bill.id_user;
+    //cvc
 
 };
 
