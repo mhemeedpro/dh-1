@@ -3,7 +3,7 @@ var sql = require('./db.js');
 
 
 var User = function(user){
-
+    
     this.name = user.name;
     this.email= user.email;
     this.password = user.password;
@@ -26,12 +26,12 @@ User.login = function (email, password , result) {
         });   
 };
 
-
 module.exports= User;
+
 
 /*
 // login
-  {
+{
     "email":"zoualfkarhaydar@hotmailcom",
     "password": "12345"
 }

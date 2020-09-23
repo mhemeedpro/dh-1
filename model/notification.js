@@ -1,5 +1,6 @@
 'use strict';
 var sql = require('./db.js');
+const Responce = require('./responce.js');
 
 var Notification =  function(notification){
 
@@ -21,7 +22,9 @@ Notification.getNotificationByIdComapany = function (id_company , result) {
                 console.log(id_company); 
               console.log('notifications : ', res);  
 
-             result(null, res);
+              var responce=new Responce({success:true,result:res});
+              result(null, responce);
+             //result(null, res);
             }
         });   
 };
@@ -31,9 +34,9 @@ Notification.getNotificationByIdComapany = function (id_company , result) {
  * @param {*} company 
  * @param {*} result 
  */
-Notification.createNewNotification = function (company , result) {
-
-    sql.query("INSERT INTO notification set ?", company, function (err, res) {
+Notification.createNewNotification = function (notifi , result) {
+    notifi.id=null;
+    sql.query("INSERT INTO notification set ?", notifi, function (err, res) {
        
             if(err) {
                 console.log("notifications sql error: ", err);
@@ -48,7 +51,7 @@ Notification.createNewNotification = function (company , result) {
         });   
 };
 
-Bill.create_bill = function (new_bill, result) { 
+Notification.create_bill = function (new_bill, result) { 
     new_bill.success=false;   
     sql.query("INSERT INTO bills set ?", new_bill, function (err, res) {
             
