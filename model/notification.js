@@ -6,7 +6,10 @@ var Notification =  function(notification){
 
     this.id= notification.id;
     this.id_company = notification.id_company;
+    this.id_point_sale = notification.id_point_sale;
     this.id_user = notification.id_user;
+    this.phone=notification.phone;
+    this.date=notification.date;
     this.msg = notification.msg;
 };
 
@@ -22,7 +25,7 @@ Notification.getNotificationByIdComapany = function (id_company , result) {
                 console.log(id_company); 
               console.log('notifications : ', res);  
 
-              var responce=new Responce({success:true,result:res});
+              var responce=new Responce({data:res});
               result(null, responce);
              //result(null, res);
             }
@@ -36,6 +39,8 @@ Notification.getNotificationByIdComapany = function (id_company , result) {
  */
 Notification.createNewNotification = function (notifi , result) {
     notifi.id=null;
+    notifi.date=new Date();
+    notifi.id_company=10;
     sql.query("INSERT INTO notification set ?", notifi, function (err, res) {
        
             if(err) {
@@ -43,7 +48,6 @@ Notification.createNewNotification = function (notifi , result) {
                 result(err, null);
             }
             else{
-                console.log(id_company); 
               console.log('notifications : ', res);  
 
              result(null, res);
@@ -72,4 +76,13 @@ module.exports= Notification;
 
 http://localhost:3000/notifications/1
 
+*/
+
+/*
+Notification.createNewNotification(new Notification({id:null,id_point_sale:1,id_company:2,id_user:2,phone:'45345',msg:'fsdafdfa'}),function(err,res){
+
+    if(err)
+    console.log(err)
+    console.log(res)
+});
 */

@@ -8,7 +8,7 @@ module.exports = function(app) {
     app.route('/bot/auth/login')
     .post(todoList.login);
 
-    app.route('bot/bills')
+    app.route('/bot/bills')
     .get(todoList.get_bill_by_point_sale)
     .post(todoList.create_bill);
    

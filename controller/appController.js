@@ -70,7 +70,7 @@ exports.create_bill= function(req, res){
   var new_bill = new Bill(req.body);
 
   //handles null error 
-   if(!new_bill.id_point_sale || !new_bill.point_sale || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company ){
+   if(!new_bill.id_point_sale  || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company ){
 
             res.status(400).send({ error:true, message: 'The bill was not created , Please provide bill items' });
             console.log(new_bill);
@@ -129,7 +129,7 @@ exports.get_notification_by_id_comapany = function(req, res) {
   Notification.getNotificationByIdComapany(req.params.id_company, function(err, notifications) {
     if (err)
       res.send(err);
-    res.json(notifications);
+    res.status(200).json(notifications);
   });
 };
 
