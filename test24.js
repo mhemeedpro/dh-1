@@ -1,6 +1,11 @@
 const puppeteer = require('puppeteer');
 //link login to web site
-function bemo(){
+var bemo =  function(){
+
+
+};
+
+bemo.bot=function(){
 const url = "https://www.bbsfonline.com/BbsfOnline/Public/User/Login"
 //const verables user data 
 const user ="0436787"

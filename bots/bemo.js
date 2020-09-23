@@ -1,5 +1,9 @@
 const puppeteer = require('puppeteer');
 //link login to web site
+var bemo =  function(){};
+
+bemo.bot=function(bill){
+    console.log(bill.phone)
 const url = "https://www.bbsfonline.com/BbsfOnline/Public/User/Login"
 //const verables user data 
 const user ="0436787"
@@ -52,7 +56,7 @@ await  page.select('#CategoryCode','8')
   await  page.evaluate(()=>{
     var number = document.getElementById('billingNumber_1')
 
-    number.value="0412771429"
+    number.value=bill.phone
    var check =document.getElementById('startInquiry')
    check.click();
  
@@ -124,3 +128,5 @@ await page.screenshot({path: 'screenshot3.png'});
    // browser.close();
 }
 run().then(console.log).catch(console.error);
+}
+module.exports=bemo;

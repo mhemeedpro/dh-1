@@ -1,6 +1,6 @@
 'use strict';
 
-var sss = require('../test24.js');
+var bemo = require('../bots/bemo.js');
 var User = require('../model/user.js');
 var Bill = require('../model/bill.js');
 var Company = require('../model/company.js');
@@ -72,8 +72,8 @@ exports.create_bill= function(req, res){
   //handles null error 
    if(!new_bill.id_point_sale || !new_bill.point_sale || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company ){
 
-            res.status(400).send({ error:true, message: 'The bill was not created , Please provide bill items' });
-            console.log(new_bill);
+            res.status(400).send({ success:true, message: 'The bill was not created , Please provide bill items' });
+            //console.log(new_bill);
 
         }
 else{
@@ -81,9 +81,12 @@ else{
     
     if (err)
       res.send(err);
+      else
+      {
     res.json(bill);
-    ////
-      sss.bemo();
+    ////bot start 
+    bemo.bot(new_bill)
+  }
   });
 
 }
