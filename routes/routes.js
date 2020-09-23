@@ -5,19 +5,20 @@ module.exports = function(app) {
   var todoList = require('../controller/appController');
 
     
-    app.route('/login')
+    app.route('/bot/auth/login')
     .post(todoList.login);
 
-    app.route('/bills')
+    app.route('bot/bills')
     .get(todoList.get_bill_by_point_sale)
     .post(todoList.create_bill);
    
-    app.route('/companies')
-    .get(todoList.get_all_companies)
+    app.route('/bot/companies')
+    .get(todoList.get_all_companies)  
+   
    // .put(todoList.update_company)
     .post(todoList.update_company);
 
-    app.route('/notifications/:id_company')
+    app.route('/bot/notifications/:id_company')
     .get(todoList.get_notification_by_id_comapany);
     
     };
