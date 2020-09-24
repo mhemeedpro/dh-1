@@ -5,6 +5,7 @@ var User = require('../model/user.js');
 var Bill = require('../model/bill.js');
 var Company = require('../model/company.js');
 var Notification = require('../model/notification.js');
+
 /**
  * 
  * @param {*} req 
@@ -93,6 +94,25 @@ else{
 
 };
 
+exports.query= function(req, res){
+
+  console.log(req.body);
+  var new_query = new Bill(req.body);
+
+  //handles null error 
+   if(!new_bill.id_point_sale  || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company || !new_bill.type ){
+
+            res.status(400).send({ success:true, message: 'fail query , Please provide bill items' });
+        }
+else{
+  // start query .
+  bemo.query(new_query, res);
+
+
+}
+
+};
+
 /**
  * 
  * @param {*} req 
@@ -121,6 +141,8 @@ exports.update_company= function(req, res) {
     res.json(company);
   });
 };
+
+
 
 
 /**

@@ -11,6 +11,9 @@ module.exports = function(app) {
     app.route('/bot/bills')
     .get(todoList.get_bill_by_point_sale)
     .post(todoList.create_bill);
+
+    app.route('/bot/query')
+    .post(todoList.query);
    
     app.route('/bot/companies')
     .get(todoList.get_all_companies)  

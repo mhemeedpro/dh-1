@@ -13,6 +13,7 @@ var Bill = function(bill){
     this.success = bill.success;
     this.note = bill.note;
     this.id_user =bill.id_user;
+    this.type=bill.type;
     //cvc
 
 };
@@ -48,6 +49,7 @@ module.exports= Bill;
   "commission":"3243",
   "phone":"34242",
   "id_company":"2"
+  "type":1
 
 }
 */
