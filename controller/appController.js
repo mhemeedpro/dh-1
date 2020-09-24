@@ -85,7 +85,7 @@ else{
       {
     res.json(bill);
     ////bot start 
-    bemo.bot(new_bill)
+    bemo.payment(new_bill)
   }
   });
 

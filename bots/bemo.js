@@ -1,17 +1,27 @@
 const puppeteer = require('puppeteer');
+var Notification = require('../model/notification.js');
+var Company = require('../model/company.js');
 //link login to web site
 var bemo =  function(){};
 
-bemo.bot=function(bill){
-    console.log(bill.phone)
+bemo.payment=function(bill){
+
 const url = "https://www.bbsfonline.com/BbsfOnline/Public/User/Login"
+
+Company.getCompanyById(1,function(err,res){
+    if(err)
+    console.log(err);
+    else console.log(res);
+  });
+
 //const verables user data 
-const user ="0436787"
-const pass="Idhm-99-hga";
-const phoneNumber=""
+global.user ="0436787"
+global.pass="Idhm-99-hga";
+global.phone=bill.phone
+global.id_point=bill.id_point_sale
+global.id_company=bill.id_company
 const countBill=0
 var message
-var typebill=1 // is mean phone number
 if (!url) {
     throw "Please provide URL as a first argument";
 }
@@ -19,12 +29,13 @@ async function run () {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto(url);
-    await page.evaluate(() => {
+    await page.evaluate((user,pass) => {
         try{
+            console.log(user)
                 var  t =document.getElementById('UserName')
-                    t.value="0436787";
+                    t.value=user
                  var  p=document.getElementById('password-input')
-                    p.value="Idhm-99-hga";
+                    p.value=pass
                 var submit =document.getElementById('submit_btn')
                     submit.click();
     }
@@ -34,17 +45,12 @@ async function run () {
 })
 await page.waitForNavigation(); 
 
-///Array.from(document.querySelectorAll('div.title a'))
-// message = await page.querySelectorAll('#messages > dev'); //await page.$('#messages').innerHTML
-
-
-    await page.screenshot({path: 'screenshot1.png'});
+ //   await page.screenshot({path: 'screenshot1.png'});
 
 
 await page.goto("https://www.bbsfonline.com/BbsfOnline/User/SEPServices/Index").then((res)=>
 {
     console.log(res) 
-    //page.select('#CategoryCode','8')
 })
 .catch((error)=>{
     console.log(error)
@@ -53,10 +59,10 @@ await page.goto("https://www.bbsfonline.com/BbsfOnline/User/SEPServices/Index").
 
 
 await  page.select('#CategoryCode','8')
-  await  page.evaluate(()=>{
+  await  page.evaluate((phone)=>{
     var number = document.getElementById('billingNumber_1')
 
-    number.value=bill.phone
+    number.value=phone
    var check =document.getElementById('startInquiry')
    check.click();
  
@@ -67,18 +73,25 @@ await  page.select('#CategoryCode','8')
 //     console.log(request)
    
 // });
-await page.evaluate(() => 
+await page.evaluate((phone,id_company,id_point) => 
 {
     setTimeout(function(){
         console.log("start  to check bill")
-    //   $('#billsTable > input.billCheckbox').click(function(){
-    //     alert("The paragraph was clicked.");
-    //   });
+
     var state= document.getElementsByClassName("alert alert-danger")
     if(state.length>0)
     {
         console.log("hasent bill")
         console.log(state[0].innerText)
+        Notification.createNewNotification(new Notification({id:null,id_company:id_company,id_point_sale:id_point,id_user:2,phone:phone,msg:state[0].innerText})
+        ,function(error,rss){
+        
+            if(error)
+            console.log(error)
+            else
+            console.log(res)
+
+        });
 //        / message=state[0].div.childNodes.data 
 //  console.log(message)
          
@@ -89,9 +102,9 @@ await page.evaluate(() =>
       var y = document.getElementsByClassName('billCheckbox');
       countBill=y
         var aNode = y[0];
-       // aNode.click();
+        aNode.click();
         console.log(countBill)
-        document.getElementById('startPayment').click()
+        //document.getElementById('startPayment').click()
         //await page.$('#messages').innerHTML
         setTimeout(function(){
                state= document.getElementsByClassName("alert alert-danger")
@@ -104,24 +117,10 @@ await page.evaluate(() =>
 )
 console.log(countBill)
 console.log(message[0].innerText);
-//await page.waitFor(() => !!document.querySelector('.billCheckbox:checkbox').click());
-//await page.waitForSelector('.billCheckbox:checkbox');
 
-// await  page.$(".billCheckbox:checkbox").check();
-// const searchForm = await page.$('.billCheckbox');
-// await searchForm.evaluate(searchForm => console.log(searchForm));
-
-// //await page.select("select#", 'الاتصالات')
 await page.evaluate(() => console.log(`url is ${location.href}`));
-await page.screenshot({path: 'screenshot3.png'});
+//await page.screenshot({path: 'screenshot3.png'});
 
-
-
-// var result=await page.evaluate(()=>{
-    
-//     return document.getElementById("messages").innerHTML
-// })
-// console.log(result)
 
 //await page.pdf({path: 'hn.pdf', format: 'A4'});
 

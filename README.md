@@ -6,6 +6,13 @@ bot-browser
 ### run project 
 node app.js
 
+### rest project last pull
+```
+git fetch origin
+git reset --hard origin/master
+git pull
+```
+
 
 #### refrance
 
