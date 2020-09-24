@@ -100,7 +100,7 @@ exports.query= function(req, res){
   var new_query = new Bill(req.body);
 
   //handles null error 
-   if(!new_bill.id_point_sale  || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company || !new_bill.type ){
+   if(!new_query.id_point_sale  || !new_query.amount || !new_query.commission || !new_query.phone || !new_query.id_company || !new_query.type ){
 
             res.status(400).send({ success:true, message: 'fail query , Please provide bill items' });
         }

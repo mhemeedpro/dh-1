@@ -8,15 +8,15 @@ bemo.payment=function(bill){
 
 const url = "https://www.bbsfonline.com/BbsfOnline/Public/User/Login"
 
-Company.getCompanyById(1,function(err,res){
-    if(err)
-    console.log(err);
+Company.getCompanyById(1,function(error,res){
+    if(error)
+    console.log(error);
     else console.log(res);
   });
-
 //const verables user data 
-global.user ="0436787"
-global.pass="Idhm-99-hga";
+
+ global.pass="Idhm-99-hga";
+//global.pass=;
 global.phone=bill.phone
 global.id_point=bill.id_point_sale
 global.id_company=bill.id_company
@@ -29,19 +29,18 @@ async function run () {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto(url);
-    await page.evaluate((user,pass) => {
-        try{
+    global.user="0436787";
+    await page.evaluate((user) => {
+     
             console.log(user)
                 var  t =document.getElementById('UserName')
                     t.value=user
                  var  p=document.getElementById('password-input')
-                    p.value=pass
+                    p.value=userData.pass
                 var submit =document.getElementById('submit_btn')
                     submit.click();
-    }
-   catch{
-       console.log("can not login to bb")
-   }
+   
+
 })
 await page.waitForNavigation(); 
 
@@ -127,5 +126,9 @@ await page.evaluate(() => console.log(`url is ${location.href}`));
    // browser.close();
 }
 run().then(console.log).catch(console.error);
+}
+bemo.query=function(query,res){
+
+    res.status(200).send({success:true})
 }
 module.exports=bemo;
