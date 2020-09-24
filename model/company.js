@@ -34,11 +34,11 @@ Company.getCompanyById = function (id_company,result) {
 
           if(err) {
               console.log(" get all companies error: ", err);
-              result(null, err);
+              result( err,null);
           }
           else{
             console.log('companies : ', res)
-           result(null, new Company(res[0]));
+           result(err, new Company(res[0]));
           }
       });   
 };

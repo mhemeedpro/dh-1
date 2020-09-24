@@ -8,40 +8,51 @@ bemo.payment=function(bill){
 
 const url = "https://www.bbsfonline.com/BbsfOnline/Public/User/Login"
 
-Company.getCompanyById(1,function(error,res){
+ var login;
+
+Company.getCompanyById(bill.id_company,function(error,res){
     if(error)
-    console.log(error);
-    else console.log(res);
+    {
+        console.log("erorr")
+    }
+   // console.log(error);
+    else 
+    login={user:res.user_name,pass:res.password};
+    console.log("success")
+ 
+    console.log(res);
   });
+ 
 //const verables user data 
 
- global.pass="Idhm-99-hga";
+ 
 //global.pass=;
-global.phone=bill.phone
-global.id_point=bill.id_point_sale
-global.id_company=bill.id_company
+const phone=bill.phone
+ 
+const id_point=bill.id_point_sale
+const id_company=bill.id_company
 const countBill=0
 var message
-if (!url) {
-    throw "Please provide URL as a first argument";
-}
-async function run () {
+// if (!url) {
+//     throw "Please provide URL as a first argument";
+// }
+async function run ( ) {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto(url);
-    global.user="0436787";
-    await page.evaluate((user) => {
+
+    await page.evaluate((login) => {
      
-            console.log(user)
+            console.log(login)
                 var  t =document.getElementById('UserName')
-                    t.value=user
+                    t.value=login.user
                  var  p=document.getElementById('password-input')
-                    p.value=userData.pass
+                    p.value=login.pass
                 var submit =document.getElementById('submit_btn')
                     submit.click();
    
 
-})
+},login)
 await page.waitForNavigation(); 
 
  //   await page.screenshot({path: 'screenshot1.png'});
@@ -65,7 +76,7 @@ await  page.select('#CategoryCode','8')
    var check =document.getElementById('startInquiry')
    check.click();
  
-})
+},phone)
 
 //page.click('#startInquiry')
 // await page.on('request', (request) => {
@@ -83,7 +94,7 @@ await page.evaluate((phone,id_company,id_point) =>
         console.log("hasent bill")
         console.log(state[0].innerText)
         Notification.createNewNotification(new Notification({id:null,id_company:id_company,id_point_sale:id_point,id_user:2,phone:phone,msg:state[0].innerText})
-        ,function(error,rss){
+        ,function(error,res){
         
             if(error)
             console.log(error)
@@ -97,7 +108,17 @@ await page.evaluate((phone,id_company,id_point) =>
     }
     else
     {
+        console.log("hasent bill")
+        console.log(state[0].innerText)
+        Notification.createNewNotification(new Notification({id:null,id_company:id_company,id_point_sale:id_point,id_user:2,phone:phone,msg:state[0].innerText})
+        ,function(error,res){
+        
+            if(error)
+            console.log(error)
+            else
+            console.log(res)
 
+        });
       var y = document.getElementsByClassName('billCheckbox');
       countBill=y
         var aNode = y[0];
@@ -106,16 +127,15 @@ await page.evaluate((phone,id_company,id_point) =>
         //document.getElementById('startPayment').click()
         //await page.$('#messages').innerHTML
         setTimeout(function(){
-               state= document.getElementsByClassName("alert alert-danger")
+        state= document.getElementsByClassName("alert alert-danger")
         console.log(state[0].innerText)
         },10000)
      
     }},15000)
 
-}
-)
+},phone,id_company,id_point )
 console.log(countBill)
-console.log(message[0].innerText);
+
 
 await page.evaluate(() => console.log(`url is ${location.href}`));
 //await page.screenshot({path: 'screenshot3.png'});
