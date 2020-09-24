@@ -28,6 +28,22 @@ Company.getAllCompanies = function (result) {
 };
 
 
+Company.getCompanyBy = function (id_company,result) {
+  console.log(" start get all companies ");
+  sql.query("Select * from companies WHERE id_company =?  ",[id_company], function (err, res) {
+
+          if(err) {
+              console.log(" get all companies error: ", err);
+              result(null, err);
+          }
+          else{
+            console.log('companies : ', res)
+           result(null, new Company(res[0]));
+          }
+      });   
+};
+
+
 Company.updateById = function(company, result){
 
     sql.query("UPDATE companies SET  name =? ,user_name =?,password =?,link =?  WHERE id_company =?", [company.name,company.user_name,company.password,company.link,company.id_company], function (err, res) {
@@ -55,4 +71,12 @@ module.exports= Company;
     "link":"pos.ispcare.mts.sy/"
   }
 
+  */
+
+/*
+  Company.getCompanyBy(2,function(err,res){
+    if(err)
+    console.log(err);
+    else console.log(res);
+  });
   */
