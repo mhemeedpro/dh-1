@@ -28,7 +28,7 @@ Company.getAllCompanies = function (result) {
 };
 
 
-Company.getCompanyBy = function (id_company,result) {
+Company.getCompanyById = function (id_company,result) {
   console.log(" start get all companies ");
   sql.query("Select * from companies WHERE id_company =?  ",[id_company], function (err, res) {
 
@@ -74,9 +74,10 @@ module.exports= Company;
   */
 
 /*
-  Company.getCompanyBy(2,function(err,res){
+  Company.getCompanyById(2,function(err,res){
     if(err)
     console.log(err);
     else console.log(res);
   });
   */
+ 
