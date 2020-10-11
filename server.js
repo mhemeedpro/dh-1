@@ -2,7 +2,7 @@ const express = require('express'),
   app = express(),
   bodyParser = require('body-parser');
   port = process.env.PORT || 3000;
-
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 const mysql = require('mysql');
 /*
@@ -22,7 +22,11 @@ const mc = mysql.createConnection({
 
 ///var sql = require('./model/db.js');
 //sql.end();
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 
 app.listen(port);

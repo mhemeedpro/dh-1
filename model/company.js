@@ -37,7 +37,7 @@ Company.getCompanyById = function (id_company,result) {
               result( err,null);
           }
           else{
-            console.log('companies : ', res)
+           // console.log('companies : ', res)
            result(err, new Company(res[0]));
           }
       });   

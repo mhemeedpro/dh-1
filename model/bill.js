@@ -2,7 +2,7 @@
 var sql = require('./db.js');
 
 var Bill = function(bill){
-
+this.id=bill.id;
     this.id_bill= bill.id_bill;
     this.id_point_sale = bill.id_point_sale;
     this.amount= bill.amount;

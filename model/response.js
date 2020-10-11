@@ -1,9 +1,9 @@
 'use strict';
-var Responce =  function(responce){
+var Response =  function(response){
 
     // this.state= responce.state;
     // this.success = responce.success;
-    this.data = responce.data;
+    this.data = response.data;
 };
 
-module.exports= Responce;
+module.exports= Response;

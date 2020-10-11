@@ -1,6 +1,6 @@
 'use strict';
 var sql = require('./db.js');
-const Responce = require('./responce.js');
+const response = require('./response.js');
 
 var Notification =  function(notification){
 
@@ -25,8 +25,8 @@ Notification.getNotificationByIdComapany = function (id_company , result) {
                 console.log(id_company); 
               console.log('notifications : ', res);  
 
-              var responce=new Responce({data:res});
-              result(null, responce);
+              var response=new response({data:res});
+              result(null, response);
              //result(null, res);
             }
         });   

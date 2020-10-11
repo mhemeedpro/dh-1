@@ -84,9 +84,9 @@ else{
       res.send(err);
       else
       {
-    res.json(bill);
+    //res.json(bill);
     ////bot start 
-    bemo.payment(new_bill)
+    bemo.payment(new_bill,res)
   }
   });
 

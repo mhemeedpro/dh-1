@@ -1,0 +1,134 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <table id="billsTable">
+            <thead>
+              <tr>
+                <th>
+                  اختر لتدفع
+                  <input type="checkbox" onchange="selectOrUnSelect(this);">
+                </th>
+                <th>رقم الفاتورة</th>
+                <th>تاريخ بدء التحصيل</th>
+                <th>تاريخ تحقق الغرامة</th>
+
+                <th>المبلغ المستحق للدفع</th>
+
+                <th>مبلغ العمولة</th>
+                <th>حالة الفاتورة</th>
+                
+                <th>ملاحظة</th>
+                <th>المبلغ الكلي</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>
+                      <input class="billCheckbox" type="checkbox" data-total="4,820.00" data-paidamountid="amount_460150" onchange="CheckAmount(this);">
+                  </td>
+                  <td>
+                    393524927
+                  </td>
+                  <td>
+                    31/05/2020 12:00:00 م
+                  </td>
+                  <td>
+                    10/07/2020 12:00:00 م
+                  </td>
+                  <td>
+
+                    4,820.00
+                  </td>
+                  <td>
+                    0.00
+                  </td>
+                  <td>فاتوره جديدة</td>
+                  
+                  <td>الدورة رقم: 2020-1</td>
+                  <td>
+<input id="SelectedBills_0__ObpgPresentmentId" name="SelectedBills[0].ObpgPresentmentId" type="hidden" value="460150"><input class="form-control" data-val="True" id="amount_460150" name="SelectedBills[0].PaidAmount" readonly="readonly" type="text" value="0">                  </td>
+                </tr>
+                <tr>
+                  <td>
+                      <input class="billCheckbox" type="checkbox" data-total="5,000.00" data-paidamountid="amount_460151" onchange="CheckAmount(this);">
+                  </td>
+                  <td>
+                    399792028
+                  </td>
+                  <td>
+                    19/07/2020 12:00:00 م
+                  </td>
+                  <td>
+                    18/08/2020 12:00:00 م
+                  </td>
+                  <td>
+
+                    5,000.00
+                  </td>
+                  <td>
+                    0.00
+                  </td>
+                  <td>فاتوره جديدة</td>
+                  
+                  <td>الدورة رقم: 2020-2</td>
+                  <td>
+<input id="SelectedBills_1__ObpgPresentmentId" name="SelectedBills[1].ObpgPresentmentId" type="hidden" value="460151"><input class="form-control" data-val="True" id="amount_460151" name="SelectedBills[1].PaidAmount" readonly="readonly" type="text" value="0">                  </td>
+                </tr>
+                <tr>
+                  <td>
+                      <input class="billCheckbox" type="checkbox" data-total="4,775.00" data-paidamountid="amount_460152" onchange="CheckAmount(this);">
+                  </td>
+                  <td>
+                    406214990
+                  </td>
+                  <td>
+                    13/09/2020 12:00:00 م
+                  </td>
+                  <td>
+                    13/10/2020 12:00:00 م
+                  </td>
+                  <td>
+
+                    4,775.00
+                  </td>
+                  <td>
+                    0.00
+                  </td>
+                  <td>فاتوره جديدة</td>
+                  
+                  <td>الدورة رقم: 2020-3</td>
+                  <td>
+<input id="SelectedBills_2__ObpgPresentmentId" name="SelectedBills[2].ObpgPresentmentId" type="hidden" value="460152"><input class="form-control" data-val="True" id="amount_460152" name="SelectedBills[2].PaidAmount" readonly="readonly" type="text" value="0">                  </td>
+                </tr>
+            </tbody>
+          </table>
+    </body>
+    <script>
+    var   table,  tr, td,td2, i , txtValue;
+     var data=new Array();
+  
+  table = document.getElementById("billsTable");
+  
+   table= table.getElementsByTagName("tbody")
+
+  console.log(table[0])
+  tr = table[0].getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+   
+
+                 td = tr[i].getElementsByTagName("td")[1];
+                 td2 = tr[i].getElementsByTagName("td")[4];
+                if (td) { 
+                   
+                    data.push({
+                        order: td.textContent || td.innerText,
+                        price:  parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
+                    } )
+      }
+     
+  }
+  console.log(data)
+    </script>
+</html>
