@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const iPhone = puppeteer.devices['iPhone 6'];
 var Notification = require('../model/notification.js');
 var Company = require('../model/company.js');
 const http = require('http')
@@ -240,13 +241,15 @@ function notifiction(text){
 }
 
 async function run ( ) {
-    const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch({ headless:true});
+   // console.info(browser);
     const page = await browser.newPage();
+ 
     await page.goto(url);
 
     await page.evaluate((login) => {
      
-            console.log(login)
+           // console.log(login)
                 var  t =document.getElementById('UserName')
                     t.value=login.user
                  var  p=document.getElementById('password-input')
@@ -266,26 +269,8 @@ if(page.url()==url)
     ,200)
 }
 
-//   await page.screenshot({path: 'screenshot1.png'});
+//await page.screenshot({path: 'plance_'+phone+'.png'});
 
-
-// balance = await page.evaluate(()=> 
-//  {
-//    var y  =document.getElementsByClassName("value animated fadeIn");
-// y=y[0].innerText
-
-
-// y = y.substring(0, 9);
-
-// console.log(y.trim());
-// // balance=y.trim();
-// // console.log(balance)
-// return y.trim()
-//  });
-
-
-// console.log("balance")
-// console.log(balance)
 
 await page.goto("https://www.bbsfonline.com/BbsfOnline/User/SEPServices/Index").then((res)=>
 {
@@ -295,93 +280,71 @@ await page.goto("https://www.bbsfonline.com/BbsfOnline/User/SEPServices/Index").
   //  console.log(error)
 })
  
+await page.setViewport({ width: 800, height: 1000});
 
-
-await  page.select('#CategoryCode','8')
+await  page.select('#CategoryCode','8');
   await  page.evaluate((phone)=>{
-    var number = document.getElementById('billingNumber_1')
+    var number = document.getElementById('billingNumber_1');
 
-    number.value=phone
-   var check =document.getElementById('startInquiry')
-   check.click();
+    number.value=phone;
+    var submit =document.getElementById('Inquiry')
+    submit.click();
+//  var btn= document.getElementById('startInquiry')
+//  btn.click(); btn.click();
+// document.getElementById('startInquiry').click();
  
 },phone)
+// await page.$eval('#billingNumber_1', el => el.value = '0411234567');
+// await page.click('#Inquiry');
 
+//syc function with web site
+await page.exposeFunction("report", report);
+await page.exposeFunction("print", print);
 await page.exposeFunction("response", response);
 await page.exposeFunction("notifiction", notifiction);
-await page.evaluate((phone,id_company,id_point,finsish,balance)=> 
-{
-   //console.log(balance)
-    setTimeout(function(){
-        console.log("start  to check bill")
+ 
+await page.waitFor(7000);
+var  have
+await page.screenshot({path: 'bill_'+phone+'.png'});
 
-    var state= document.getElementsByClassName("alert alert-danger")
-    if(state.length>0)
-    {
-        console.log("hasent bill")
-       // console.log(state[0].innerText)
-       // notifiction(state[0].innerText);
 
-///res.status(400).send({success:false})
-response(false,0,state[0].innerText,200,[]);
-    }
-    else
-    {
-        console.log("you have bill")
-      var y = document.getElementsByClassName('billCheckbox');
-     
-      if(y.length>0)
-      {
-        var   table,  tr, td,td2, i ,billTmP=0 ;
-     var data=new Array();
+have=await page.evaluate(()=>{
+  var  tmp= document.getElementsByClassName("alert alert-danger")
+  if(tmp.length>0)
+  return tmp[0].innerHTML;
+  else
+  return false
+})
+ 
+ if(have!=false)
+ response(false,0,have,200,[]);
+ else
+ {
+  await page.evaluate(()=> {
+    var     tr, td,td2, i ,billTmP=0 ;
+    var data=new Array();
+    tr = document.getElementsByTagName("tr");
+    for (i =0; i < tr.length; i++) {
   
-  table = document.getElementById("billsTable");
-  
-   table= table.getElementsByTagName("tbody")
-
-  console.log(table[0])
-  tr = table[0].getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-   
-
-                 td = tr[i].getElementsByTagName("td")[1];
-                 td2 = tr[i].getElementsByTagName("td")[4];
-                if (td) { 
-                  billTmP =billTmP+parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
-                  data.push({
-                      order: parseInt(td.textContent || td.innerText),
-                      price: parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
-                  } )
-
-      }
-     
-  }
-           countBill=y
-            //  var aNode =y[0]; 
-            //  var billTmP=0;
-            //  var s = document.getElementsByClassName('form-control');
-            //  for(var i =0 ; i< y.length;i++)
-            //  { 
-            //    y[0].click();
-            //    console.log("checked bill -"+i)
-            //   parseInt(s[i+1].value)+100
-            //  }
-        //aNode.click();
-       
-        // console.log(s[1].value) 
-       
-        // console.log(s.length)
-
-        response(true,billTmP,"",200,data);
+        td = tr[i].getElementsByTagName("td")[1];
         
-      }
-     
-    }},4000)
+        td2 = tr[i].getElementsByTagName("td")[4];
+      if (td) { 
+        billTmP =billTmP+parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
+        data.push({
+            order: parseInt(td.textContent || td.innerText),
+            price: parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
+        });
+        }} 
+        response(true,billTmP,"",200,data);
+ }) 
 
-},phone,id_company,id_point )
+ }
 
 function response(state,maxBill,message,code,data)
 {
+
+  print("response")
   res.status(code).send({
     success:state,
     data:data,
@@ -390,12 +353,19 @@ function response(state,maxBill,message,code,data)
  // page.close();
   browser.close();
 }
+function print(msg)
+{
+  console.log(msg);
+}
+function report(state){
+   page.screenshot({path: './report/'+state +'_'+ phone+'.png'});
+}
 //console.log(countBill)
 
-await page.evaluate(() => console.log(`url is ${location.href}`));
+//await page.evaluate(() => console.log(`url is ${location.href}`));
 
 }
-run().then(console.log).catch(console.error);
+run();//.then(console.log).catch(console.error);
    // res.status(200).send({success:true})
 }
 module.exports=bemo;

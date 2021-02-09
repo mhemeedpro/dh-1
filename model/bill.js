@@ -34,8 +34,22 @@ Bill.create_bill = function (new_bill, result) {
         });           
 };
 
-
-module.exports= Bill;
+// const updatedBill=async (id)=> {
+//     var query="UPDATE `bills` SET `success`= 1  WHERE `bills`.`id_bill` ="+id
+//     sql.query(query, function (err, res) {
+            
+//         if(err) {
+//             console.log("success: ", err);
+//             result(err, null);
+//         }
+//         else{
+//             console.log(res);
+//             result(null, res);
+//         }
+//     });           
+//     console.log("updatedBill")
+// }
+module.exports= Bill//,updatedBill};
 
 /*
 

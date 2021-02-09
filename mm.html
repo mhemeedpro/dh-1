@@ -64,7 +64,7 @@
                     18/08/2020 12:00:00 م
                   </td>
                   <td>
-
+                    <div class="alert alert-danger">رقم الفاتوره غير صالح أو غير موجود ، يرجى التحقق من المدخلات.</div>
                     5,000.00
                   </td>
                   <td>
@@ -109,26 +109,29 @@
     var   table,  tr, td,td2, i , txtValue;
      var data=new Array();
   
-  table = document.getElementById("billsTable");
+     tr=  document.getElementsByClassName("alert alert-danger").innerHTML;
+     console.log(tr)
+ // table = document.getElementById("billsTable");
   
-   table= table.getElementsByTagName("tbody")
+   //table= document.getElementsByTagName("tbody")
 
-  console.log(table[0])
-  tr = table[0].getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-   
+  
+  // tr = document.getElementsByTagName("tr");
+  // for (i = 0; i < tr.length; i++) {
 
-                 td = tr[i].getElementsByTagName("td")[1];
-                 td2 = tr[i].getElementsByTagName("td")[4];
-                if (td) { 
+
+  //                td = document.getElementsByTagName("td")[i];
+  //              //  td2 = tr[i].getElementsByTagName("td")[4];
+  //              console.log(td)
+  //               if (td) { 
                    
-                    data.push({
-                        order: td.textContent || td.innerText,
-                        price:  parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
-                    } )
-      }
+  //                   data.push({
+  //                       order: td.textContent || td.innerText,
+  //                      // price:  parseFloat(td2.textContent.replace(/[^\d\.\-]/g, "") || td2.innerText.replace(/[^\d\.\-]/g, "")  ) +100
+  //                   } )
+  //     }
      
-  }
-  console.log(data)
+  // }
+  // console.log(data)
     </script>
 </html>

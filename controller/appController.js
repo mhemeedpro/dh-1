@@ -1,11 +1,14 @@
 'use strict';
-
+var mtn = require('../bots/mtn.js');
+var syriatel = require('../bots/syriatel.js');
 var bemo = require('../bots/bemo.js');
 var User = require('../model/user.js');
+const readCapatcha = require('./capatcha')
 var Bill = require('../model/bill.js');
 var Company = require('../model/company.js');
 var Notification = require('../model/notification.js');
-
+//var readyMtn = mtn.initialization();
+ //var readsy = syriatel.initialization();
 /**
  * 
  * @param {*} req 
@@ -73,7 +76,7 @@ exports.create_bill= function(req, res){
   //handles null error 
    if(!new_bill.id_point_sale  || !new_bill.amount || !new_bill.commission || !new_bill.phone || !new_bill.id_company ){
 
-            res.status(400).send({ success:true, message: 'The bill was not created , Please provide bill items' });
+            res.status(400).send({ success:false, message: 'The bill was not created , Please provide bill items' });
             //console.log(new_bill);
 
         }
@@ -84,9 +87,15 @@ else{
       res.send(err);
       else
       {
-    //res.json(bill);
-    ////bot start 
-    bemo.payment(new_bill,res)
+        if(new_bill.id_company==1)
+         res.status(400).send({ success:false, message: 'we havent this bot yeat' });
+        //bemo.payment(new_bill,res)
+        else if(new_bill.id_company==2)
+        //res.status(400).send({ success:readCapatcha('jcaptcha.jpg'), message: 'we havent this bot yeat' });
+        mtn.payment(new_bill,res)
+        else
+        res.status(400).send({ success:false, message: 'we havent this bot yeat' });
+        
   }
   });
 
